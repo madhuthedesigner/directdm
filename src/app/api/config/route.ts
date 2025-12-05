@@ -63,20 +63,6 @@ export async function POST(request: NextRequest) {
 
         const { data, error } = await supabase
             .from("automation_configs")
-            .update({
-                llm_provider: llmProvider,
-                llm_model: llmModel,
-                llm_api_key: llmApiKey,
-                dm_auto_reply_enabled: dmAutoReplyEnabled,
-                comment_auto_reply_enabled: commentAutoReplyEnabled,
-            })
-            .eq("user_id", user.id)
-            .select()
-            .single();
-
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 500 });
-        }
 
         return NextResponse.json(data);
     } catch (error) {
