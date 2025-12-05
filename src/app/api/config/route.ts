@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
 
         const { data, error } = await supabase
             .from("automation_configs")
-            .update(updateData)
+            .update(updateData as any)
             .eq("user_id", user.id)
             .select()
             .single();
