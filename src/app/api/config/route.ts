@@ -54,15 +54,34 @@ export async function POST(request: NextRequest) {
         const body = await request.json();
 
         const {
-            llmProvider,
-            llmModel,
-            llmApiKey,
-            dmAutoReplyEnabled,
-            commentAutoReplyEnabled,
+            llm_provider,
+            llm_model,
+            llm_api_key,
+            system_prompt,
+            dm_auto_reply_enabled,
+            comment_auto_reply_enabled,
         } = body;
+
+        const updateData: any = {
+            dm_auto_reply_enabled,
+            comment_auto_reply_enabled,
+        };
+
+        if (llm_provider) updateData.llm_provider = llm_provider;
+        if (llm_model) updateData.llm_model = llm_model;
+        if (llm_api_key) updateData.llm_api_key = llm_api_key;
+        if (system_prompt !== undefined) updateData.system_prompt = system_prompt;
 
         const { data, error } = await supabase
             .from("automation_configs")
+            .update(updateData)
+            .eq("user_id", user.id)
+            .select()
+            .single();
+
+        if (error) {
+            return NextResponse.json({ error: error.message }, { status: 500 });
+        }
 
         return NextResponse.json(data);
     } catch (error) {
