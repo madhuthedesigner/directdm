@@ -72,6 +72,7 @@ export async function POST(request: NextRequest) {
         if (llm_api_key) updateData.llm_api_key = llm_api_key;
         if (system_prompt !== undefined) updateData.system_prompt = system_prompt;
 
+        // @ts-ignore - Supabase generated types issue
         const { data, error } = await supabase
             .from("automation_configs")
             .update(updateData as any)
