@@ -113,145 +113,95 @@ export default function SettingsPage() {
                 </div>
             )}
 
-            {/* Instagram Connection */}
-            <InstagramStatus />
+                    </label>
+                    <textarea
+                        placeholder="You are a helpful assistant..."
+                        value={formData.system_prompt}
+                        onChange={(e) => setFormData({ ...formData, system_prompt: e.target.value })}
+                        rows={6}
+                        className="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white font-mono text-sm"
+                    />
+                </div >
+            </div >
+        </div >
 
-            {/* AI Model Configuration */}
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700 space-y-6">
-                <div className="flex items-center gap-2">
-                    <SettingsIcon size={20} className="text-primary-600" />
-                    <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                        AI Model Configuration
-                    </h2>
+        {/* Automation Settings */ }
+        < div className = "bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700 space-y-6" >
+        <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
+            Automation Settings
+        </h2>
+
+        <div className="space-y-4">
+            {/* DM Auto-reply */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <p className="font-medium text-neutral-900 dark:text-white">
+                        Auto-reply to DMs
+                    </p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                        Automatically respond to direct messages
+                    </p>
                 </div>
-
-                <div className="space-y-4">
-                    {/* LLM Provider */}
-                    <div>
-                        <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
-                            LLM Provider
-                        </label>
-                        <select
-                            value={formData.llm_provider}
-                            onChange={(e) => setFormData({ ...formData, llm_provider: e.target.value })}
-                            className="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
-                        >
-                            <option value="gemini">Google Gemini</option>
-                            <option value="claude">Anthropic Claude</option>
-                            <option value="openai">OpenAI</option>
-                        </select>
-                    </div>
-
-                    {/* API Key */}
-                    <div>
-                        <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
-                            API Key
-                        </label>
-                        <input
-                            type="password"
-                            placeholder="Enter your API key"
-                            value={formData.llm_api_key}
-                            onChange={(e) => setFormData({ ...formData, llm_api_key: e.target.value })}
-                            className="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white"
-                        />
-                        <p className="text-xs text-neutral-500 mt-1">
-                            Leave blank to keep current key
-                        </p>
-                    </div>
-
-                    {/* System Prompt */}
-                    <div>
-                        <label className="block text-sm font-medium text-neutral-900 dark:text-white mb-2">
-                            System Prompt
-                        </label>
-                        <textarea
-                            placeholder="You are a helpful assistant..."
-                            value={formData.system_prompt}
-                            onChange={(e) => setFormData({ ...formData, system_prompt: e.target.value })}
-                            rows={6}
-                            className="w-full px-4 py-2 rounded-lg border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-900 text-neutral-900 dark:text-white font-mono text-sm"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Automation Settings */}
-            <div className="bg-white dark:bg-neutral-800 rounded-lg p-6 border border-neutral-200 dark:border-neutral-700 space-y-6">
-                <h2 className="text-2xl font-semibold text-neutral-900 dark:text-white">
-                    Automation Settings
-                </h2>
-
-                <div className="space-y-4">
-                    {/* DM Auto-reply */}
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium text-neutral-900 dark:text-white">
-                                Auto-reply to DMs
-                            </p>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                Automatically respond to direct messages
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => setFormData({ ...formData, dm_auto_reply_enabled: !formData.dm_auto_reply_enabled })}
-                            className={`relative w-14 h-8 rounded-full transition-colors ${formData.dm_auto_reply_enabled
-                                    ? 'bg-primary-600'
-                                    : 'bg-neutral-300 dark:bg-neutral-600'
-                                }`}
-                        >
-                            <div
-                                className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${formData.dm_auto_reply_enabled ? 'translate-x-6' : ''
-                                    }`}
-                            />
-                        </button>
-                    </div>
-
-                    {/* Comment Auto-reply */}
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium text-neutral-900 dark:text-white">
-                                Auto-reply to Comments
-                            </p>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400">
-                                Automatically respond to post comments
-                            </p>
-                        </div>
-                        <button
-                            onClick={() => setFormData({ ...formData, comment_auto_reply_enabled: !formData.comment_auto_reply_enabled })}
-                            className={`relative w-14 h-8 rounded-full transition-colors ${formData.comment_auto_reply_enabled
-                                    ? 'bg-primary-600'
-                                    : 'bg-neutral-300 dark:bg-neutral-600'
-                                }`}
-                        >
-                            <div
-                                className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${formData.comment_auto_reply_enabled ? 'translate-x-6' : ''
-                                    }`}
-                            />
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            {/* Save Button */}
-            <div className="flex justify-end">
                 <button
-                    onClick={handleSave}
-                    disabled={isSaving}
-                    className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium flex items-center gap-2 disabled:opacity-50"
+                    onClick={() => setFormData({ ...formData, dm_auto_reply_enabled: !formData.dm_auto_reply_enabled })}
+                    className={`relative w-14 h-8 rounded-full transition-colors ${formData.dm_auto_reply_enabled
+                        ? 'bg-primary-600'
+                        : 'bg-neutral-300 dark:bg-neutral-600'
+                        }`}
                 >
-                    {isSaving ? (
-                        <>
-                            <Spinner size="sm" />
-                            Saving...
-                        </>
-                    ) : (
-                        <>
-                            <Save size={20} />
-                            Save Settings
-                        </>
-                    )}
+                    <div
+                        className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${formData.dm_auto_reply_enabled ? 'translate-x-6' : ''
+                            }`}
+                    />
+                </button>
+            </div>
+
+            {/* Comment Auto-reply */}
+            <div className="flex items-center justify-between">
+                <div>
+                    <p className="font-medium text-neutral-900 dark:text-white">
+                        Auto-reply to Comments
+                    </p>
+                    <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                        Automatically respond to post comments
+                    </p>
+                </div>
+                <button
+                    onClick={() => setFormData({ ...formData, comment_auto_reply_enabled: !formData.comment_auto_reply_enabled })}
+                    className={`relative w-14 h-8 rounded-full transition-colors ${formData.comment_auto_reply_enabled
+                        ? 'bg-primary-600'
+                        : 'bg-neutral-300 dark:bg-neutral-600'
+                        }`}
+                >
+                    <div
+                        className={`absolute top-1 left-1 w-6 h-6 bg-white rounded-full transition-transform ${formData.comment_auto_reply_enabled ? 'translate-x-6' : ''
+                            }`}
+                    />
                 </button>
             </div>
         </div>
+    </div >
+
+        {/* Save Button */ }
+        < div className = "flex justify-end" >
+            <button
+                onClick={handleSave}
+                disabled={isSaving}
+                className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors font-medium flex items-center gap-2 disabled:opacity-50"
+            >
+                {isSaving ? (
+                    <>
+                        <Spinner size="sm" />
+                        Saving...
+                    </>
+                ) : (
+                    <>
+                        <Save size={20} />
+                        Save Settings
+                    </>
+                )}
+            </button>
+    </div >
+        </div >
     )
 }

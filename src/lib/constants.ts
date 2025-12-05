@@ -1,24 +1,3 @@
-export const APP_NAME = "DirectDM";
-export const APP_DESCRIPTION = "AI-powered Instagram Auto-Reply System";
-
-// LLM Providers
-export const LLM_PROVIDERS = {
-    GEMINI: "gemini",
-    CLAUDE: "claude",
-    OPENAI: "openai",
-} as const;
-
-export type LLMProvider = (typeof LLM_PROVIDERS)[keyof typeof LLM_PROVIDERS];
-
-// LLM Models
-export const LLM_MODELS = {
-    GEMINI_FLASH: "gemini-2.0-flash-exp",
-    GEMINI_PRO: "gemini-1.5-pro",
-    CLAUDE_SONNET: "claude-3-5-sonnet-20241022",
-    CLAUDE_HAIKU: "claude-3-5-haiku-20241022",
-} as const;
-
-// Message Types
 export const MESSAGE_TYPES = {
     DM: "dm",
     COMMENT: "comment",
